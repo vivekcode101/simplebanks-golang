@@ -10,7 +10,7 @@ import (
 	"github.com/vivekcode101/simplebanks-golang/util"
 )
 
-func createRandomAccount(t *testing.T) Account {
+func createrandomAccount(t *testing.T) Account {
 	user := createRandomUser(t)
 	arg := CreateAccountParams{
 		Owner:    user.Username,
@@ -32,11 +32,11 @@ func createRandomAccount(t *testing.T) Account {
 }
 
 func TestCreateAccount(t *testing.T) {
-	createRandomAccount(t)
+	createrandomAccount(t)
 }
 
 func TestAccount(t *testing.T) {
-	account1 := createRandomAccount(t)
+	account1 := createrandomAccount(t)
 	account2, err := testQueries.GetAccount(context.Background(), account1.ID)
 	require.NoError(t, err)
 	require.NotEmpty(t, account2)
@@ -49,7 +49,7 @@ func TestAccount(t *testing.T) {
 }
 
 func TestUpdateAccount(t *testing.T) {
-	account1 := createRandomAccount(t)
+	account1 := createrandomAccount(t)
 
 	arg := UpdateAccountParams{
 		ID:      account1.ID,
@@ -69,7 +69,7 @@ func TestUpdateAccount(t *testing.T) {
 }
 
 func TestDeleteAccount(t *testing.T) {
-	account1 := createRandomAccount(t)
+	account1 := createrandomAccount(t)
 	err := testQueries.DeleteAccount(context.Background(), account1.ID)
 	require.NoError(t, err)
 
@@ -81,7 +81,7 @@ func TestDeleteAccount(t *testing.T) {
 
 func TestListAccounts(t *testing.T) {
 	for i := 0; i < 10; i++ {
-		createRandomAccount(t)
+		createrandomAccount(t)
 	}
 
 	arg := ListAccountsParams{
